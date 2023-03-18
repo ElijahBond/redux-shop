@@ -1,0 +1,36 @@
+.cart-button {
+    background-color: aqua;
+    border: 1px solid rgb(27, 165, 165);
+    padding: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    color: rgb(185, 58, 174);
+    font-weight: bold;
+
+    &:hover {
+        background: rgb(27, 165, 165);
+    }
+
+    &:active {
+        background-color: rgb(161, 255, 110);
+    }
+
+    .shopping-cart {
+        padding: 0.5rem;
+        
+    }
+
+    .count {
+        padding: 0.1rem 1rem;
+        background-color: yellow;
+        border-radius: 0.5rem;
+
+        &:hover {
+            background: rgb(27, 165, 165);
+        }
+    }
+}
+
+// * {
+//     border: 1px solid red;
+// }

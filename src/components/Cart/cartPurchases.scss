@@ -5,6 +5,12 @@
     background-color: rgb(235, 226, 209);
     box-shadow: 10px 5px 5px rgb(239, 126, 126);
 
+    animation: 3s show ease;
+    
+    // &:hover {
+    //     animation: 3s hide ease;
+    // }
+
     h2 {
         text-align: center;
     }
@@ -14,7 +20,18 @@
         padding-left: 0;
         margin: 2rem;
     }
+
+    @keyframes show {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes hide {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
 }
+
 
 .count {
     display: flex;

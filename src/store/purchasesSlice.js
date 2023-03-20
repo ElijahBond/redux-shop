@@ -49,5 +49,11 @@ const purchasesSlice = createSlice({
     }
 });
 
+const sendCartData = (cartData) => {
+    return (dispatchAction) => {
+        dispatchAction()
+    }
+}
+
 export const purchasesActions = purchasesSlice.actions;
 export default purchasesSlice;

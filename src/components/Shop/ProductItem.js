@@ -1,14 +1,48 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { purchasesActions } from '../../store/purchasesSlice';
 
 const ProductItem = ({data: { id, price, title, description }}) => {
-
-    // const productsValue = useSelector(state => state.purchasesSlice.value)
+    const cart = useSelector(state => state.purchasesSlice)
     const increaseProducts = useDispatch()
 
     const increaseProductsHandler = () => {
-        increaseProducts(purchasesActions.increaseProduct({ id, price, title }))
-    }
+        const updatedItemsQuantity = cart.itemsQuantity + 1;
+
+        const updatedItems = cart.items.slice();
+        const existingItem = updatedItems.find(item => item.id === id)
+
+        if (existingItem) {
+            const updatedExistingItem = {...existingItem}
+            updatedExistingItem.quantity++;
+            updatedExistingItem.totalPrice = updatedExistingItem.totalPrice + price;
+
+            const existingItemIndex = updatedItems.findIndex(item => item.id === id)
+            updatedItems[existingItemIndex] = updatedExistingItem;
+        } else {
+            updatedItems.push({
+                id,
+                price,
+                quantity: 1,
+                totalPrice: price,
+                title
+            })
+        }
+
+        const updatedCart = {
+            itemsQuantity: updatedItemsQuantity,
+            items: updatedItems
+        }
+
+        increaseProducts(purchasesActions.updateCart(updatedCart))
+
+        // increaseProducts(
+        //     purchasesActions.increaseProduct({ 
+        //         id, 
+        //         price, 
+        //         title 
+        //     })
+        // )
+    };
 
     return(
         <>

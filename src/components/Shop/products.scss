@@ -10,10 +10,6 @@
         justify-content: space-around;
     }
 
-    .description {
-        border-top: 1px solid black;
-    }
-
     .buy {
         border: 1px solid salmon;
         border-radius: 15px;
@@ -21,9 +17,14 @@
         padding: 0.5rem;
         background-color: greenyellow;
         cursor: pointer;
+        
 
         &:active {
             background-color: green;
         }
+    }
+
+    .border {
+        border-bottom: 5px solid rgb(211, 82, 26);
     }
 }

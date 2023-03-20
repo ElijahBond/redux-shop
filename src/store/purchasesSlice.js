@@ -1,31 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_PURCHASES_STATE = {
-    count: 0,
-    value: 8,
-    totalValue: 0
+    items: [],
+    itemsQuantity: 0,
 };
-
-console.log(INITIAL_PURCHASES_STATE)
 
 const purchasesSlice = createSlice({
     name: 'purchasesSlice',
     initialState: INITIAL_PURCHASES_STATE,
     reducers: {
-        increaseProduct(state) {
-            state.count += 1
-            state.totalValue = (state.count * state.value).toFixed(2);
+        increaseProduct(state, action) {
+            const newItem = action.payload
+            const existingItem = state.items.find(item => item.id === newItem.id);
+            state.itemsQuantity++;
+
+            if (!existingItem) {
+                state.items.push({
+                    id: newItem.id,
+                    price: newItem.price,
+                    quantity: 1,
+                    totalPrice: newItem.price,
+                    title: newItem.title
+                });
+            } else {
+                existingItem.quantity++;
+                existingItem.totalPrice = existingItem.price * existingItem.quantity
+            }
         },
 
-        decreaseProduct(state) {
-            if (state.count <= 0) return
-            
-            state.count -= 1
-            state.totalValue = (state.count * state.value).toFixed(2);
+        decreaseProduct(state, action) {
+            const id = action.payload
+            const existingItem = state.items.find(item => item.id === id);
+            state.itemsQuantity--;
+
+            if (existingItem.quantity === 1) {
+                state.items = state.items.filter(item => item.id !== id)
+            } else {
+                existingItem.quantity--;
+                existingItem.totalPrice = existingItem.totalPrice - existingItem.price
+            }
         }
     }
 });
-
 
 export const purchasesActions = purchasesSlice.actions;
 export default purchasesSlice;

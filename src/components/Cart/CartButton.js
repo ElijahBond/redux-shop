@@ -6,7 +6,7 @@ import './cartButton.scss';
 
 const CartButton = () => {
     const dispatchVisibleProducts = useDispatch();
-    const productsCount = useSelector(state => state.purchasesSlice.count)
+    const itemsQuantity = useSelector(state => state.purchasesSlice.itemsQuantity)
 
     const toggleVisible = () => {
         dispatchVisibleProducts(cartActions.setCartVisible())
@@ -17,7 +17,7 @@ const CartButton = () => {
             onClick={toggleVisible}
             className='cart-button'>
             <span className='shopping-cart'>Корзина</span>
-            <span className='count'>{productsCount}</span>
+            <span className='count'>{itemsQuantity}</span>
         </button>
     )
 };
